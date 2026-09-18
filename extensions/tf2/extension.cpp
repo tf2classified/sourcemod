@@ -73,11 +73,13 @@ SH_DECL_HOOK3_void(IServerGameDLL, ServerActivate, SH_NOATTRIB, 0, edict_t *, in
 
 bool TF2Tools::SDK_OnLoad(char *error, size_t maxlength, bool late)
 {
+#if 0
 	if (strcmp(g_pSM->GetGameFolderName(), "tf") != 0)
 	{
 		UTIL_Format(error, maxlength, "Cannot Load TF2 Extension on mods other than TF2");
 		return false;
 	}
+#endif
 
 	ServerClass *sc = UTIL_FindServerClass("CTFPlayer");
 	if (sc == NULL)
@@ -99,7 +101,7 @@ bool TF2Tools::SDK_OnLoad(char *error, size_t maxlength, bool late)
 	sharesys->AddDependency(myself, "sdktools.ext", false, true);
 
 	char conf_error[255] = "";
-	if (!gameconfs->LoadGameConfigFile("sm-tf2.games", &g_pGameConf, conf_error, sizeof(conf_error)))
+	if (!gameconfs->LoadGameConfigFile("sm-tf2c.games", &g_pGameConf, conf_error, sizeof(conf_error)))
 	{
 		if (conf_error[0])
 		{
